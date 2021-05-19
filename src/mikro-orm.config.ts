@@ -1,10 +1,10 @@
-import { Test } from "./entities/Entity";
+import { Test, User } from "./entities";
 import { __prod__ } from "./constants";
 import { MikroORM } from "@mikro-orm/core";
 import path from "path";
 
 export default {
-  entities: [Test],
+  entities: [Test, User],
   dbName: 'test',
   type: 'mongo',
   debug: !__prod__,
