@@ -1,3 +1,4 @@
-import { Container } from "./container";
+import { Container } from "./Container";
+import { InputField } from "./InputField";
 
-export { Container };
+export { Container, InputField };

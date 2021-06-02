@@ -1,32 +1,62 @@
-import React from 'react';
-import { Formik, Form } from 'formik';
-import { FormControl, FormErrorIcon, FormErrorMessage, FormLabel } from '@chakra-ui/form-control';
-import { Input } from '@chakra-ui/react';
-import { Container } from '../components';
+import React from "react";
+import { Formik, Form } from "formik";
+import { Container, InputField } from "../components";
+import { Box } from "@chakra-ui/layout";
+import { Button } from "@chakra-ui/button";
+import { useMutation } from "urql";
 
-interface registerProps {
-}
+interface registerProps {}
 
-const Register: React.FC<registerProps> = ({ }) => {
+const REGISTER_MUT = `mutation Register($username: String!, $password: String!) {
+  register(options: {
+    username: $username
+    password: $password
+  }) {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      username
+      createdOn
+    }
+  }
+}`;
+
+const Register: React.FC<registerProps> = ({}) => {
+  const [, register] = useMutation(REGISTER_MUT);
   return (
     <Container variant="small">
       <Formik
         initialValues={{ username: "", password: "" }}
-        onSubmit={values => console.log(values)}
+        onSubmit={(values) => {
+          register(values);
+        }}
       >
-        {({ values, handleChange }) => (
+        {({ values, isSubmitting }) => (
           <Form>
-            <FormControl>
-              {/* isInvalid={form.errors.username && form.touched.username}> */}
-              <FormLabel htmlFor="username">Username</FormLabel>
-              <Input
-                value={values.username}
-                onChange={handleChange}
-                id="username"
-                placeholder="username"
+            <InputField
+              name="username"
+              placeholder="username"
+              label="Username"
+            />
+            <Box mt={4}>
+              <InputField
+                name="password"
+                placeholder="password"
+                label="Password"
+                type="password"
               />
-              {/* <FormErrorMessage>{form.errors.username}</FormErrorMessage>  */}
-            </FormControl>
+            </Box>
+            <Button
+              type="submit"
+              colorScheme="teal"
+              isLoading={isSubmitting}
+              mt={4}
+            >
+              Register
+            </Button>
           </Form>
         )}
       </Formik>
