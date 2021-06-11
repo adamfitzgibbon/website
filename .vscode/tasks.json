@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "server/",
+      "problemMatcher": [],
+      "label": "npm: dev - server",
+      "detail": "Server Build",
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "client/",
+      "problemMatcher": [],
+      "label": "Client Build",
+      "detail": "next dev",
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "watch",
+      "path": "server/",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "Typescript Watch",
+      "detail": "tsc -w"
+    },
+    {
+      "label": "Build",
+      "dependsOn": ["Typescript Watch", "Client Build", "Server Build"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
