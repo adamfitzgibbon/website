@@ -6,8 +6,8 @@
       "script": "dev",
       "path": "server/",
       "problemMatcher": [],
-      "label": "npm: dev - server",
-      "detail": "Server Build",
+      "label": "Server Build",
+      "detail": "nodemon dist/index.js",
       "group": "build"
     },
     {

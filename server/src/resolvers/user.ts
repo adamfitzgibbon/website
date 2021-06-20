@@ -1,4 +1,13 @@
-import { Arg, Ctx, Field, InputType, Mutation, ObjectType, Query, Resolver } from "type-graphql";
+import {
+  Arg,
+  Ctx,
+  Field,
+  InputType,
+  Mutation,
+  ObjectType,
+  Query,
+  Resolver,
+} from "type-graphql";
 import { MyContext } from "../types";
 import { User } from "../entities";
 import argon2 from "argon2";
@@ -42,35 +51,41 @@ export class UserResolver {
 
   @Mutation(() => UserResponse)
   async register(
-    @Arg('options') options: UsernamePasswordInput,
+    @Arg("options") options: UsernamePasswordInput,
     @Ctx() { em, req }: MyContext
   ): Promise<UserResponse> {
     const { username, password } = options;
     if (username.length < 1) {
       return {
-        errors: [{
-          field: "username",
-          message: "You must include a username."
-        }]
+        errors: [
+          {
+            field: "username",
+            message: "You must include a username.",
+          },
+        ],
       };
     }
 
     if (password.length < 1) {
       return {
-        errors: [{
-          field: "password",
-          message: "You must include a password."
-        }]
+        errors: [
+          {
+            field: "password",
+            message: "You must include a password.",
+          },
+        ],
       };
     }
 
     const existingUser = await em.findOne(User, { username });
     if (existingUser) {
       return {
-        errors: [{
-          field: "username",
-          message: "That username already exists!"
-        }]
+        errors: [
+          {
+            field: "username",
+            message: "That username already exists!",
+          },
+        ],
       };
     }
     const hashedPassword = await argon2.hash(password);
@@ -80,28 +95,32 @@ export class UserResolver {
     return { user };
   }
 
-  @Query(() => UserResponse)
+  @Mutation(() => UserResponse)
   async login(
-    @Arg('options') options: UsernamePasswordInput,
+    @Arg("options") options: UsernamePasswordInput,
     @Ctx() { em, req }: MyContext
   ): Promise<UserResponse> {
     const { username, password } = options;
     const user = await em.findOne(User, { username });
     if (!user) {
       return {
-        errors: [{
-          field: "username",
-          message: "That username doesn't exist."
-        }]
+        errors: [
+          {
+            field: "username",
+            message: "That username doesn't exist.",
+          },
+        ],
       };
     }
     const valid = await argon2.verify(user.password, password);
     if (!valid) {
       return {
-        errors: [{
-          field: "password",
-          message: "Incorrect password"
-        }]
+        errors: [
+          {
+            field: "password",
+            message: "Incorrect password",
+          },
+        ],
       };
     }
 
