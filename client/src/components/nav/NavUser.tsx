@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "@chakra-ui/react";
-import { useMeQuery } from "../generated/graphql";
-import { LoginLinks } from ".";
+import { useMeQuery } from "../../generated/graphql";
+import { LoginLinks } from "./LoginLinks";
 
 interface NavUserProps {}
 

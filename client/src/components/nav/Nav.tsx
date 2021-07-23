@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex, Heading, Spacer } from "@chakra-ui/react";
-import { NavUser } from ".";
+import { NavUser } from "./NavUser";
 
 interface NavProps {}
 
