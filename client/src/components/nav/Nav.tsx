@@ -6,7 +6,7 @@ interface NavProps {}
 
 export const Nav: React.FC<NavProps> = ({}) => {
   return (
-    <Flex bg="tomato" p={4}>
+    <Flex bg="tan" p={4}>
       <Box>
         <Heading size="md">Adam's Website</Heading>
       </Box>

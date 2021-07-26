@@ -1,19 +1,20 @@
-import { HStack, Link, Text } from "@chakra-ui/react";
+import { HStack, Button, Text } from "@chakra-ui/react";
 import React from "react";
-import NextLink from "next/link";
-import { User } from "../../generated/graphql";
+import { BaseUserFragment, useLogoutMutation } from "../../generated/graphql";
 
 interface UserLinksProps {
-  user: Pick<User, "id" | "username">;
+  user: BaseUserFragment;
 }
 
 export const UserLinks: React.FC<UserLinksProps> = ({ user }) => {
+  const [{ fetching }, logout] = useLogoutMutation();
+
   return (
     <HStack spacing={2}>
       <Text>{user?.username}</Text>
-      <Link as={NextLink} href="/logout">
+      <Button onClick={() => logout()} isLoading={fetching} variant="link">
         Logout
-      </Link>
+      </Button>
     </HStack>
   );
 };
