@@ -1,0 +1,12 @@
+query Posts {
+  posts {
+    id
+    name
+    age
+    vehicles {
+      name
+      color
+      wheels
+    }
+  }
+}
