@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import "dotenv-safe/config";
 import { MikroORM } from "@mikro-orm/core";
 import express from "express";
 import { COOKIE_NAME, __prod__ } from "./constants";
@@ -21,7 +22,7 @@ const main = async () => {
 
   app.use(
     cors({
-      origin: "http://localhost:3000",
+      origin: process.env.CORS_ORIGIN,
       credentials: true,
     })
   );
@@ -37,9 +38,10 @@ const main = async () => {
         sameSite: "lax", // csrf
         httpOnly: true,
         secure: __prod__, // cookie only works in https
+        // find proper domain// domain: __prod__ ? ".codeponder.com" : undefined
       },
       saveUninitialized: false,
-      secret: "keyboard cat", // TODO: make this secret
+      secret: process.env.SESSION_SECRET, // TODO: make this secret
       resave: false,
     })
   );
@@ -57,7 +59,7 @@ const main = async () => {
     cors: false,
   });
 
-  app.listen(4000, () => {
+  app.listen(parseInt(process.env.PORT), () => {
     console.log("server starting on localhost:4000");
   });
 };
