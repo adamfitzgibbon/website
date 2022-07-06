@@ -1,19 +1,17 @@
 import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { Test } from "../entities";
-import { MyContext } from "../types";
+import { MyContext } from "../types/mikro-orm";
 
 @Resolver()
 export class TestResolver {
   @Query(() => [Test])
-  posts(
-    @Ctx() { em }: MyContext
-  ): Promise<Test[]> {
+  posts(@Ctx() { em }: MyContext): Promise<Test[]> {
     return em.find(Test, {});
   }
 
   @Query(() => Test, { nullable: true })
   post(
-    @Arg('name', () => String) name: string,
+    @Arg("name", () => String) name: string,
     @Ctx() { em }: MyContext
   ): Promise<Test | null> {
     return em.findOne(Test, { name: name });
@@ -21,7 +19,7 @@ export class TestResolver {
 
   @Mutation(() => Test)
   async createPost(
-    @Arg('name') name: string,
+    @Arg("name") name: string,
     @Ctx() { em }: MyContext
   ): Promise<Test | null> {
     const post = em.create(Test, { name });
@@ -31,8 +29,8 @@ export class TestResolver {
 
   @Mutation(() => Test)
   async updatePost(
-    @Arg('name') name: string,
-    @Arg('age') age: number,
+    @Arg("name") name: string,
+    @Arg("age") age: number,
     @Ctx() { em }: MyContext
   ): Promise<Test | null> {
     const post = await em.findOne(Test, { name });
@@ -46,7 +44,7 @@ export class TestResolver {
 
   @Mutation(() => Boolean)
   async deletePost(
-    @Arg('name') name: string,
+    @Arg("name") name: string,
     @Ctx() { em }: MyContext
   ): Promise<boolean> {
     await em.nativeDelete(Test, { name });

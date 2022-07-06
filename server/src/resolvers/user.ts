@@ -8,7 +8,7 @@ import {
   Query,
   Resolver,
 } from "type-graphql";
-import { MyContext } from "../types";
+import { MyContext } from "../types/mikro-orm";
 import { User } from "../entities";
 import argon2 from "argon2";
 import { COOKIE_NAME } from "../constants";

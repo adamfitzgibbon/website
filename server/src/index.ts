@@ -10,7 +10,7 @@ import { HelloResolver, TestResolver, UserResolver } from "./resolvers";
 import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
-import { MyContext } from "./types";
+import { MyContext } from "./types/mikro-orm";
 import cors from "cors";
 
 const main = async () => {

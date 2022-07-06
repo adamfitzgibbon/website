@@ -1,0 +1,25 @@
+services:
+  client:
+    image: website/client
+    build: ./client
+    ports:
+      - 3000:3000
+    command: yarn dev
+
+  server:
+    image: website/server
+    build: ./server
+    ports:
+      - 8080:8080
+    command: yarn dev
+
+  mongo:
+    image: mongo:4.2.8
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+volumes:
+  mongodb:
+  mongodb_config:
