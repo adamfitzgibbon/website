@@ -5,12 +5,12 @@ import path from "path";
 
 export default {
   entities: [Test, User],
-  dbName: 'test',
-  type: 'mongo',
+  dbName: "test",
+  type: "mongo",
   debug: !__prod__,
-  // user credentials?
+  clientUrl: "mongodb://mongo:27017",
   migrations: {
     path: path.join(__dirname, "./migrations"),
     pattern: /^[\w-]+\d+\.[tj]s$/,
-  }
+  },
 } as Parameters<typeof MikroORM.init>[0];
