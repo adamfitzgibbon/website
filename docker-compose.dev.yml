@@ -5,6 +5,8 @@ services:
     ports:
       - 3000:3000
     command: yarn dev
+    volumes:
+      - ./client:/usr/src/app
 
   server:
     image: website/server
@@ -13,6 +15,9 @@ services:
       target: dev
     ports:
       - 8080:8080
+      - 4000:4000
+    volumes:
+      - ./server:/usr/src/app
 
   mongo:
     image: mongo:4.4

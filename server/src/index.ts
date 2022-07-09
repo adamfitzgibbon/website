@@ -62,7 +62,7 @@ const main = async () => {
   });
 
   app.listen(parseInt(process.env.PORT), () => {
-    console.log("server starting on localhost:4000");
+    console.log(`server starting on localhost:${process.env.PORT}`);
   });
 };
 
