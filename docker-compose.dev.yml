@@ -7,6 +7,7 @@ services:
     command: yarn dev
     volumes:
       - ./client:/usr/src/app
+      - /usr/src/app/node_modules
 
   server:
     image: website/server
@@ -16,8 +17,11 @@ services:
     ports:
       - 8080:8080
       - 4000:4000
+      - 9229:9229
     volumes:
       - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist
 
   mongo:
     image: mongo:4.4
