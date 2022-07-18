@@ -40,10 +40,11 @@ const main = async () => {
         sameSite: "lax", // csrf
         httpOnly: true,
         secure: __prod__, // cookie only works in https
-        // find proper domain// domain: __prod__ ? ".codeponder.com" : undefined
+        // find proper domain
+        // domain: __prod__ ? ".codeponder.com" : undefined
       },
       saveUninitialized: false,
-      secret: process.env.SESSION_SECRET, // TODO: make this secret
+      secret: process.env.SESSION_SECRET!, // TODO: make this secret!
       resave: false,
     })
   );
@@ -61,7 +62,7 @@ const main = async () => {
     cors: false,
   });
 
-  app.listen(parseInt(process.env.PORT), () => {
+  app.listen(parseInt(process.env.PORT!), () => {
     console.log(`server starting on localhost:${process.env.PORT}`);
   });
 };

@@ -9,7 +9,7 @@ const Index = () => {
   return (
     <>
       <Nav />
-      <div>Hello World!</div>
+      <div>Hello World?</div>
       {!data ? null : data.posts.map((p) => <div key={p.id}>{p.name}</div>)}
     </>
   );

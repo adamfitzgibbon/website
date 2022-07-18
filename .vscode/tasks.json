@@ -7,7 +7,7 @@
       "path": "server/",
       "problemMatcher": [],
       "label": "Server Build",
-      "detail": "nodemon dist/index.js",
+      "detail": "nodemon src/index.ts",
       "group": "build"
     },
     {
@@ -20,17 +20,8 @@
       "group": "build"
     },
     {
-      "type": "npm",
-      "script": "watch",
-      "path": "server/",
-      "group": "build",
-      "problemMatcher": [],
-      "label": "Typescript Watch",
-      "detail": "tsc -w"
-    },
-    {
       "label": "Build",
-      "dependsOn": ["Typescript Watch", "Client Build", "Server Build"],
+      "dependsOn": ["Client Build", "Server Build"],
       "group": {
         "kind": "build",
         "isDefault": true
