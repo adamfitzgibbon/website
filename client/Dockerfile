@@ -1,18 +1,13 @@
-FROM node:16 AS build
-
-# Create app directory
+FROM node:16 AS install
 WORKDIR /usr/src/app
-
-# Install app dependencies
 COPY package.json yarn.lock ./
-
 RUN yarn
-
-# Bundle app source
+EXPOSE 3000
 COPY . .
 
+FROM install AS dev
+CMD [ "yarn", "dev" ]
+
+FROM install AS production
 RUN yarn build
-
-EXPOSE 3000
-
 CMD [ "yarn", "start" ]
