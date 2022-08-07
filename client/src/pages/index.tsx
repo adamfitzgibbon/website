@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { withUrqlClient } from "next-urql";
 import React from "react";
 import { Nav } from "../components/nav/Nav";
@@ -9,7 +10,7 @@ const Index = () => {
   return (
     <>
       <Nav />
-      <div>Hello World?</div>
+      <Box h={8000}>Hello World?</Box>
       {!data ? null : data.posts.map((p) => <div key={p.id}>{p.name}</div>)}
     </>
   );
