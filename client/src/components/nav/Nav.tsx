@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Flex, Heading, Spacer } from "@chakra-ui/react";
+import { Image } from "../shared";
 import { NavUser } from "./NavUser";
 
 interface NavProps {}
@@ -14,6 +15,13 @@ export const Nav: React.FC<NavProps> = ({}) => {
         <Spacer />
         <NavUser />
       </Flex>
+      <Image
+        height={100}
+        width={100}
+        borderRadius="full"
+        src="/adam_mug.jpg"
+        alt="Adam Fitzgibbon"
+      />
     </Box>
   );
 };

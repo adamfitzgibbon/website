@@ -1,4 +1,4 @@
-import { Container, InputField } from "./shared";
+import { Container, Image, InputField } from "./shared";
 import { Nav } from "./nav";
 
-export { Container, InputField, Nav };
+export { Container, Image, InputField, Nav };
